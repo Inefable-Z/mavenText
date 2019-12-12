@@ -17,7 +17,7 @@ public class SeleniumUtilChrome {
 
 	private String loginUrl = "https://platform.xd57.com:5007/login.phtml";// 登录页
 	private String username = "wu37"; // 帐号
-	private String password = "123456"; // 密码123456789
+	private String password = "123456"; // 密码123
 
 	
 	// 初始化 selenium要调用的浏览器并启动
