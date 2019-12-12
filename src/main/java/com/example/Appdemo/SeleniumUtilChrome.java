@@ -71,8 +71,6 @@ public class SeleniumUtilChrome {
 		login();
 		waitForSecond();
 		work();
-		work();
-		work();
 		//quitDrvier();
 	}
 	
