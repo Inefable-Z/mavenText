@@ -8,29 +8,29 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /*
- * seleunim Æô¶¯¹È¸èä¯ÀÀÆ÷
+ * seleunim å¯åŠ¨è°·æ­Œæµè§ˆå™¨
  */
 public class SeleniumUtilChrome {
-	// ä¯ÀÀÆ÷³ÌĞòµÄÂ·¾¶
+	// æµè§ˆå™¨ç¨‹åºçš„è·¯å¾„
 	private String webBrowserPath = "";
 
 	private WebDriver driver = null;
 
-	private String loginUrl = "https://platform.xd57.com:5007/login.phtml";// µÇÂ¼Ò³
-	private String username = "wu37"; // ÕÊºÅ
-	private String password = "123456"; // ÃÜÂë
+	private String loginUrl = "https://platform.xd57.com:5007/login.phtml";// ç™»å½•é¡µ
+	private String username = "wu37"; // å¸å·
+	private String password = "123456"; // å¯†ç 
 
 	
-	// ³õÊ¼»¯ seleniumÒªµ÷ÓÃµÄä¯ÀÀÆ÷²¢Æô¶¯
+	// åˆå§‹åŒ– seleniumè¦è°ƒç”¨çš„æµè§ˆå™¨å¹¶å¯åŠ¨
 	public void init() {
-		webBrowserPath = "D:/Program Files/chromedriver.exe";//¹È¸è
+		webBrowserPath = "D:/Program Files/chromedriver.exe";//è°·æ­Œ
 		System.setProperty("webdriver.chrome.driver", webBrowserPath);
 		ChromeOptions option=new ChromeOptions();
 		option.addArguments("disable-infobars");
 		driver = new ChromeDriver(option);
 	}
 
-	// ¹Ø±Õä¯ÀÀÆ÷
+	// å…³é—­æµè§ˆå™¨
 	public void quitDrvier() {
 		if (null != driver) {
 			driver.quit();
@@ -45,32 +45,34 @@ public class SeleniumUtilChrome {
 		}
 	}
 
-	// Ä£ÄâµÇÂ¼¹ı³Ì
+	// æ¨¡æ‹Ÿç™»å½•è¿‡ç¨‹
 	public void login() {
 		driver.manage().window().maximize();
 		driver.get(loginUrl); 
 		waitForSecond();
-		WebElement element = driver.findElement(By.id("username"));// ÕÒµ½idÃûÎª uinµÄdom ÔªËØ
-		element.sendKeys(username);// µ±Ç°elementÎª uinÊäÈë¿ò£¬½«ÓÃ»§ÃûÌîµ½Õâ¸öÊäÈë¿ò
-		waitForSecond(); // ÈÃ½ø³ÌµÈ´ıÒ»»á£¬±ÜÃâÅ¼¶û³öÏÖµÄÔªËØ»ñÈ¡Òì³£
-		element = driver.findElement(By.id("password"));// ÕÒµ½idÃûÎªpµÄ domÔªËØ
-		element.sendKeys(password);// ½«ÃÜÂëÌîÈë
+		WebElement element = driver.findElement(By.id("username"));// æ‰¾åˆ°idåä¸º uinçš„dom å…ƒç´ 
+		element.sendKeys(username);// å½“å‰elementä¸º uinè¾“å…¥æ¡†ï¼Œå°†ç”¨æˆ·åå¡«åˆ°è¿™ä¸ªè¾“å…¥æ¡†
+		waitForSecond(); // è®©è¿›ç¨‹ç­‰å¾…ä¸€ä¼šï¼Œé¿å…å¶å°”å‡ºç°çš„å…ƒç´ è·å–å¼‚å¸¸
+		element = driver.findElement(By.id("password"));// æ‰¾åˆ°idåä¸ºpçš„ domå…ƒç´ 
+		element.sendKeys(password);// å°†å¯†ç å¡«å…¥
 		waitForSecond();
-		//element = driver.findElement(By.id("info_error"));// ÕÒµ½µÇÂ¼°´Å¥
-		element = driver.findElement(By.xpath("//input[@type='submit']"));// ÕÒµ½µÇÂ¼°´Å¥
+		//element = driver.findElement(By.id("info_error"));// æ‰¾åˆ°ç™»å½•æŒ‰é’®
+		element = driver.findElement(By.xpath("//input[@type='submit']"));// æ‰¾åˆ°ç™»å½•æŒ‰é’®
 		waitForSecond();
-		element.click(); // µã»÷µÇÂ¼°´Å¥
+		element.click(); // ç‚¹å‡»ç™»å½•æŒ‰é’®
 	}
-	//µÇÂ¼³É¹¦ºó
+	//ç™»å½•æˆåŠŸå
 	public void work() {////div[@class='paginatorBatchSizes']/span
-		WebElement element = driver.findElement(By.linkText("»ì·ş"));
-		element.click(); // µã»÷°´Å¥
+		WebElement element = driver.findElement(By.linkText("æ··æœ"));
+		element.click(); // ç‚¹å‡»æŒ‰é’®
 	}
 
 	public void demo() {
 		init();
 		login();
 		waitForSecond();
+		work();
+		work();
 		work();
 		//quitDrvier();
 	}
