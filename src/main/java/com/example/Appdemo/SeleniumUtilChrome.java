@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /*
  * seleunim 启动谷歌浏览器
@@ -18,7 +17,7 @@ public class SeleniumUtilChrome {
 
 	private String loginUrl = "https://platform.xd57.com:5007/login.phtml";// 登录页
 	private String username = "wu37"; // 帐号
-	private String password = "123456"; // 密码密码
+	private String password = "123456"; // 密码1
 
 	
 	// 初始化 selenium要调用的浏览器并启动
@@ -71,6 +70,7 @@ public class SeleniumUtilChrome {
 		init();
 		login();
 		waitForSecond();
+		work();
 		work();
 		work();
 		//quitDrvier();
