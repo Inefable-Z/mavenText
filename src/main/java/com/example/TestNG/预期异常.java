@@ -13,6 +13,6 @@ public class Ô¤ÆÚÒì³£ {
 	@Test(timeOut = 2000)
 	public void longTime() throws InterruptedException {
 		Thread.sleep(1000);
-		System.out.println("111");
+		System.out.println("112221");
 	}
 }
