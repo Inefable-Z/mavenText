@@ -1,7 +1,12 @@
 package com.example.MyTest;
 
+import java.util.List;
+
 import org.openqa.selenium.*;
+import org.openqa.selenium.By.ById;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
 /*
  * seleunim 启动谷歌浏览器
  */
@@ -15,10 +20,9 @@ public class TestChandao {
 	private String username = "demo"; // 帐号
 	private String password = "123456"; // 密码
 
-	
 	// 初始化 selenium要调用的浏览器并启动
 	public void init() {
-		webBrowserPath = "D:/Program Files/chromedriver.exe";//谷歌
+		webBrowserPath = "D:/Program Files/chromedriver.exe";// 谷歌
 		System.setProperty("webdriver.chrome.driver", webBrowserPath);
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -46,72 +50,97 @@ public class TestChandao {
 		element.clear();
 		element.sendKeys(username);// 当前element为 uin输入框，将用户名填到这个输入框
 		waitForSecond(); // 让进程等待一会，避免偶尔出现的元素获取异常
-		element = driver.findElement(By.xpath(".//*[@id='loginPanel']/div/div[2]/form/table/tbody/tr[2]/td/input"));// 找到id名为p的 dom元素
+		element = driver.findElement(By.xpath(".//*[@id='loginPanel']/div/div[2]/form/table/tbody/tr[2]/td/input"));// 找到id名为p的
+																													// dom元素
 		element.clear();
 		element.sendKeys(password);// 将密码填入
 		waitForSecond();
 		element = driver.findElement(By.xpath(".//*[@id='submit']"));// 找到登录按钮
 		element.click(); // 点击登录按钮
 		waitForSecond();
-		//------------------------------------------------------------------------------
-		//driver.getWindowHandle();
+		// ------------------------------------------------------------------------------
+		// driver.getWindowHandle();
 		driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[4]/a")).click();
 		driver.findElement(By.xpath(".//*[@id='subNavbar']/ul/li[1]/a")).click();
 		driver.findElement(By.xpath(".//*[@id='mainMenu']/div[3]/a[3]")).click();
-		//所属产品
+		// 所属产品
 		driver.findElement(By.xpath(".//*[@id='product_chosen']/a/span")).click();
 		waitForSecond();
 		driver.findElement(By.xpath(".//*[@id='product_chosen']/div/ul/li[3]")).click();
-		//所属模块
+		// 所属模块
 		driver.findElement(By.xpath(".//*[@id='module_chosen']/a/span")).click();
 		waitForSecond();
-		//driver.findElement(By.xpath(".//*[@id='module_chosen']/div/ul/li[1]")).click();
-		//所属迭代
+		// driver.findElement(By.xpath(".//*[@id='module_chosen']/div/ul/li[1]")).click();
+		// 所属迭代
 		driver.findElement(By.xpath(".//*[@id='project_chosen']/a/span")).click();
 		waitForSecond();
 		driver.findElement(By.xpath(".//*[@id='project_chosen']/div/ul/li")).click();
 		waitForSecond();
-		//影响版本
+		// 影响版本
 		driver.findElement(By.xpath(".//*[@id='openedBuild_chosen']/ul")).click();
 		waitForSecond();
 		driver.findElement(By.xpath(".//*[@id='openedBuild_chosen']/div/ul/li")).click();
 		waitForSecond();
-		//当前指派
+
+		// --------------------------选择下拉框的值 start-----------------------------
+		// 打印出所有选项值
+
+		Select sel = new Select(driver.findElement(ById.xpath(".//*[@id='openedBuild']")));
+		List<WebElement> options = sel.getOptions();
+		for (WebElement option : options) {
+			System.out.println(option.getText());
+		}
+		//使用name值选中
+		/*
+		 * WebElement mySelectElm = driver.findElement(By.id("GangManId")); Select
+		 * mySelect= new Select(mySelectElm); mySelect.selectByVisibleText("于庆洋");
+		 */
+
+		//使用value值选中
+		/*
+		 * WebElement mySelectElm = driver.findElement(By.id("GangManId")); Select
+		 * mySelect= new Select(mySelectElm); mySelect.selectByValue("10");
+		 */
+
+		// --------------------------选择下拉框的值 end-----------------------------
+		
+		// 当前指派
 		/*
 		 * driver.findElement(By.xpath(".//*[@id='assignedTo_chosen']/a/div[2]/input")).
 		 * click(); waitForSecond();
 		 * driver.findElement(By.xpath(".//*[@id='assignedTo_chosen']/div/ul/li[1]")).
 		 * click(); waitForSecond();
 		 */
-	
+
 		driver.findElement(By.xpath(".//*[@id='title']")).sendKeys("魔盒，模块1");
 		waitForSecond();
 		driver.findElement(By.xpath(".//*[@id='submit']")).click();
 		String title = driver.getTitle();
-		//System.out.println(title);
+		// System.out.println(title);
 	}
-	//登录成功后
+
+	// 登录成功后
 	public void work() {
 		WebElement element = driver.findElement(By.xpath(".//*[@id='navbar']/ul/li[4]/a"));
-		element.click(); 
+		element.click();
 		element = driver.findElement(By.xpath(".//*[@id='subNavbar']/ul/li[1]/a"));
-		element.click(); 
+		element.click();
 		element = driver.findElement(By.xpath(".//*[@id='mainMenu']/div[3]/a[3]"));
-		element.click(); 
+		element.click();
 		element = driver.findElement(By.xpath(".//*[@id='title']"));
 		element.sendKeys("测试");
 		waitForSecond();
 		element = driver.findElement(By.xpath(".//*[@id='submit']"));
-		element.click(); 
+		element.click();
 	}
 
 	public void demo() {
 		init();
 		login();
-		//work();
-		//quitDrvier();
+		// work();
+		// quitDrvier();
 	}
-	
+
 	public static void main(String[] args) {
 		TestChandao chandao = new TestChandao();
 		chandao.demo();
